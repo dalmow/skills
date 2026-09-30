@@ -40,6 +40,12 @@ export OBSIDIAN_VAULT_PATH="$HOME/caminho/do/vault"
 export GITHUB_AUTH_TOKEN="ghp_..."   # escopos de leitura: repo, read:org
 ```
 
+No app desktop (aberto pelo Dock/Finder), as variáveis do `~/.zshrc` não chegam ao Claude
+Code: o vault fica vazio e o GitHub falha com `Authorization header is badly formatted`.
+Declare as duas no bloco `env` do `~/.claude/settings.json` ou abra o app pelo terminal
+(`open -a Claude`). Sem `OBSIDIAN_VAULT_PATH` válido, o MCP do vault falha de propósito
+em vez de ler outro diretório.
+
 Linear e Google Drive **não** vêm no plugin: a skill usa os MCPs que você já tem
 configurados no Claude Code (conectores do claude.ai ou `claude mcp add`). Se algum faltar,
 o setup avisa e pede a configuração; a fonte ausente fica de fora do documento. Para a

@@ -27,10 +27,12 @@ Esta fase é o setup do ciclo. Roda no início de todo brag document e também i
 ### 0.1 Verificar as fontes
 
 Verifique uma fonte por vez e resolva antes de avançar:
-1. **Obsidian** — confirme que a env `OBSIDIAN_VAULT_PATH` está definida e aponta para um diretório existente, e que o MCP `obsidian-vault` responde. Se faltar, peça o caminho do vault e instrua a exportar a env no shell (ex.: `~/.zshrc`) e reabrir o Claude Code. Sem o vault não há onde ler nem salvar o perfil, então esta é a única fonte que bloqueia.
-2. **GitHub** — confirme que a env `GITHUB_AUTH_TOKEN` está definida e que o MCP `github` do plugin responde. Se faltar, peça o token (escopos de leitura: `repo`, `read:org`) e instrua a exportar a env no shell e reabrir o Claude Code.
+1. **Obsidian** — confirme que a env `OBSIDIAN_VAULT_PATH` está definida e aponta para um diretório existente, e que o MCP `obsidian-vault` responde. Chame `list_allowed_directories` do MCP e confira se o diretório exposto é o mesmo de `OBSIDIAN_VAULT_PATH`; se for outro (ex.: o diretório de trabalho da sessão), a env não chegou ao processo do Claude Code e o MCP está lendo a pasta errada. Nesse caso, ou se a env faltar, pare e oriente o usuário (veja "Envs no app desktop" abaixo). Sem o vault não há onde ler nem salvar o perfil, então esta é a única fonte que bloqueia.
+2. **GitHub** — confirme que a env `GITHUB_AUTH_TOKEN` está definida e que o MCP `github` do plugin responde. Se faltar, peça o token (escopos de leitura: `repo`, `read:org`) e oriente como em "Envs no app desktop". O erro `Authorization header is badly formatted` indica env vazia no processo, não token inválido.
 3. **Linear** e **Google Drive** — para cada um, procure ferramentas do MCP correspondente na sessão e faça uma chamada simples de leitura (ex.: usuário autenticado). Se não houver MCP, ou se ele falhar por autenticação/conexão, peça ao usuário para configurá-lo: conector no claude.ai (Settings → Connectors) ou `claude mcp add`, e autorização via `/mcp`. Não crie nem sugira configuração própria do plugin para essas fontes.
    - Para o Drive, se o usuário não quiser configurar um MCP, aceite a trilha exportada como Markdown/PDF dentro do vault e aponte `trilha_drive` para esse arquivo.
+
+**Envs no app desktop** — o app do Claude aberto pelo Dock/Finder não herda as variáveis do `~/.zshrc`. Oriente o usuário a declarar `OBSIDIAN_VAULT_PATH` e `GITHUB_AUTH_TOKEN` no bloco `env` do `~/.claude/settings.json`, ou a abrir o app pelo terminal (`open -a Claude`), e reiniciar a sessão.
 
 Resuma em uma linha o que está disponível e o que ficou de fora.
 
