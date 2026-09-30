@@ -6,8 +6,8 @@ tipo: perfil-ciclo
 ciclo: 2026-2S
 inicio: 2026-07-01
 fim: 2026-12-31
-cargo: Desenvolvedor Pleno II
-proximo_nivel: Desenvolvedor Sênior I
+cargo: Desenvolvedor Pleno II   # ou o nível conforme sua empresa, ex.: L8, L9
+proximo_nivel: Desenvolvedor Sênior I   # ou L9, L10 etc.
 trilha_drive: <link ou nome do arquivo da trilha no Google Drive>
 github_usuario: <usuario>
 github_orgs:          # SOMENTE estas orgs serão consultadas (obrigatório, ao menos uma)
