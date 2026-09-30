@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "claude-plugins",
+  "description": "Personal Claude Code plugin marketplace.",
+  "owner": {
+    "name": "Kelvi Dalmazo",
+    "url": "https://github.com/dalmow"
+  },
+  "plugins": [
+    {
+      "name": "brag-document",
+      "description": "Gera o brag document do ciclo semestral a partir de Linear, GitHub, Obsidian e da trilha de carreira no Google Drive.",
+      "source": "./plugins/brag-document",
+      "category": "productivity"
+    }
+  ]
+}
