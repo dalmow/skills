@@ -11,26 +11,41 @@ O objetivo é produzir um brag document que o usuário leve para a avaliação d
 
 | Fonte | O que traz | Como acessar |
 |---|---|---|
-| Obsidian (vault) | Contexto, impacto, feedbacks, estudos, trabalho invisível | MCP do Obsidian ou do sistema de arquivos |
-| Linear | Issues e projetos entregues | Conector do Linear |
-| GitHub | PRs abertos/mergeados e code reviews feitos | MCP do GitHub |
-| Google Drive | Trilha de carreira (expectativas por cargo) | Conector do Google Drive |
+| Obsidian (vault) | Contexto, impacto, feedbacks, estudos, trabalho invisível | MCP `obsidian-vault` do plugin (env `OBSIDIAN_VAULT_PATH`) |
+| Linear | Issues e projetos entregues | MCP do Linear já configurado no Claude Code |
+| GitHub | PRs abertos/mergeados e code reviews feitos | MCP do GitHub já configurado no Claude Code |
+| Google Drive | Trilha de carreira (expectativas por cargo) | MCP/conector do Google Drive já configurado no Claude Code |
+
+O plugin só traz o MCP do Obsidian. Linear, GitHub e Drive usam os servidores que o usuário já configurou no Claude Code (conectores do claude.ai ou `claude mcp add`, em qualquer escopo). Identifique-os pelas ferramentas disponíveis na sessão (nomes contendo `linear`, `github` ou `drive`/`google`), sem assumir um nome de servidor fixo.
 
 Se alguma fonte não estiver disponível, avise o usuário qual está faltando, siga com as demais e deixe explícito no documento final que aquela fonte não foi consultada. Não bloqueie o trabalho por uma fonte ausente.
 
-## Fase 0 — Perfil e ciclo
+## Fase 0 — Setup e perfil
 
-O perfil fica salvo no vault para que o usuário só precise informá-lo uma vez. Procure o arquivo `perfil.md` na raiz da pasta do semestre (ex.: `2026-2S/perfil.md`); se não existir lá, procure o do semestre anterior como ponto de partida.
+Esta fase é o setup do ciclo. Roda no início de todo brag document e também isoladamente via `/dalmow-skills:perfil`.
+
+### 0.1 Verificar as fontes
+
+Verifique uma fonte por vez e resolva antes de avançar:
+1. **Obsidian** — confirme que a env `OBSIDIAN_VAULT_PATH` está definida e aponta para um diretório existente, e que o MCP `obsidian-vault` responde. Se faltar, peça o caminho do vault e instrua a exportar a env no shell (ex.: `~/.zshrc`) e reabrir o Claude Code. Sem o vault não há onde ler nem salvar o perfil, então esta é a única fonte que bloqueia.
+2. **Linear**, **GitHub** e **Google Drive** — para cada um, procure ferramentas do MCP correspondente na sessão e faça uma chamada simples de leitura (ex.: usuário autenticado). Se não houver MCP, ou se ele falhar por autenticação/conexão, peça ao usuário para configurá-lo: conector no claude.ai (Settings → Connectors) ou `claude mcp add`, e autorização via `/mcp`. Não crie nem sugira configuração própria do plugin para essas fontes.
+   - Para o Drive, se o usuário não quiser configurar um MCP, aceite a trilha exportada como Markdown/PDF dentro do vault e aponte `trilha_drive` para esse arquivo.
+
+Resuma em uma linha o que está disponível e o que ficou de fora.
+
+### 0.2 Perfil do ciclo
+
+O perfil fica salvo no vault para que o usuário só precise informá-lo uma vez. Procure o arquivo `perfil.md` na raiz da pasta do semestre (ex.: `2026-2S/perfil.md`); se não existir lá, use o do semestre anterior como ponto de partida (valores propostos, que o usuário confirma).
 
 **Se o perfil não existir**, pergunte, uma coisa por vez:
-1. Qual é o seu cargo atual? (ex.: Desenvolvedor Pleno II). É a pergunta mais importante, pois define contra qual nível da trilha o documento será avaliado.
+1. Qual é o seu cargo atual? (ex.: Desenvolvedor Pleno II, L8, L9). É a pergunta mais importante, pois define contra qual nível da trilha o documento será avaliado. Pergunte também o próximo nível.
 2. Qual o arquivo da trilha de carreira no Drive? Antes de perguntar, tente encontrar sozinho buscando no Drive por termos como "trilha de carreira", "career path", "matriz de carreira", e peça só a confirmação.
 3. Qual o seu usuário do GitHub e **quais organizações** devem ser consideradas? O usuário participa de mais de uma org, então pergunte explicitamente; se o MCP permitir, liste as orgs dele para que escolha. Só as orgs escolhidas entram no perfil.
 4. Confirme as datas do ciclo. Proponha a partir do nome da pasta (1S = janeiro a junho, 2S = julho a dezembro) e pergunte se estão corretas.
 
 Então salve `perfil.md` no formato de `references/perfil-template.md` e mostre ao usuário o que foi salvo.
 
-**Se o perfil existir**, apenas confirme numa linha ("Vou avaliar como Desenvolvedor Pleno II, ciclo 2026-2S, de 01/07 a 31/12, olhando as orgs X e Y no GitHub — correto?"). Inclua as orgs do GitHub nessa confirmação. Se o cargo ou as orgs mudaram (promoção, troca de time), atualize o arquivo.
+**Se o perfil existir**, apenas confirme numa linha ("Vou avaliar como Desenvolvedor Pleno II, ciclo 2026-2S, de 01/07 a 31/12, olhando as orgs X e Y no GitHub — correto?"). Inclua as orgs do GitHub nessa confirmação. Se o cargo ou as orgs mudaram (promoção, troca de time), atualize o arquivo e `atualizado_em`.
 
 ## Fase 1 — Trilha de carreira (Drive)
 

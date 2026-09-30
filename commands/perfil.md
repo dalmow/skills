@@ -1,11 +1,16 @@
 ---
-description: Mostra ou atualiza o perfil do ciclo (cargo, trilha, orgs do GitHub, datas)
+description: Configura o ciclo e mostra/edita o perfil (fontes, cargo, trilha, orgs do GitHub, datas)
 argument-hint: "[AAAA-XS]"
 ---
 
-Leia o arquivo `$ARGUMENTS/perfil.md` no vault do Obsidian (se nenhum ciclo foi informado,
-use o semestre corrente no formato AAAA-XS). Mostre os campos atuais e pergunte, um por vez,
-se desejo alterar algum: cargo, próximo nível, trilha no Drive, usuário do GitHub, orgs do
-GitHub (allowlist) e datas do ciclo. Salve as alterações seguindo
-`skills/avaliacao-ciclo/references/perfil-template.md` e atualize `atualizado_em`.
-Se o arquivo não existir, crie-o seguindo a Fase 0 da skill `avaliacao-ciclo`.
+Use a skill `avaliacao-ciclo` e execute **somente a Fase 0 (Setup e perfil)** para o ciclo
+$ARGUMENTS (se omitido, use o semestre corrente no formato AAAA-XS: 1S = janeiro a junho,
+2S = julho a dezembro).
+
+Rode a verificação das fontes normalmente. Na parte do perfil, se `perfil.md` já existir,
+não se limite à confirmação em uma linha: mostre os campos atuais e pergunte, um por vez,
+se desejo alterar algum (cargo, próximo nível, trilha no Drive, usuário do GitHub, orgs do
+GitHub e datas do ciclo). Salve as alterações e atualize `atualizado_em`.
+
+Ao final, resuma o que ficou configurado e o que ainda falta. Não siga para as fases
+seguintes da skill.
