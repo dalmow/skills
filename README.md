@@ -9,6 +9,18 @@ Marketplace de plugins/skills do Kelvi Dalmazo para o Claude Code.
 /plugin install dalmow-skills@dalmow
 ```
 
+## Atualizar
+
+O plugin segue semver no `plugin.json`; cada release aumenta a versão. Para receber updates:
+
+- Automático: no `/plugin`, aba de marketplaces, ative o auto-update do `dalmow`
+  (vem desligado para marketplaces de terceiros).
+- Manual: `/plugin marketplace update dalmow` e depois `/plugin update`, ou no shell:
+
+```bash
+claude plugin update dalmow-skills@dalmow
+```
+
 ## O que vem no plugin `dalmow-skills`
 
 - **Skill `avaliacao-ciclo`** — coleta, entrevista e geração do brag document (ativa
