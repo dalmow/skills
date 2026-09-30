@@ -29,20 +29,24 @@ claude plugin update dalmow-skills@dalmow
   Linear, GitHub, Drive) e cria ou edita o perfil (cargo/nível, trilha, orgs, datas).
 - **`/dalmow-skills:brag [AAAA-XS]`** — gera o brag document. Começa pelo mesmo setup;
   se o perfil do ciclo não existir, cria antes de coletar.
-- **`.mcp.json`** — apenas o servidor MCP do vault do Obsidian.
+- **`.mcp.json`** — servidores MCP do vault do Obsidian e do GitHub.
 
 ## Pré-requisitos
 
-Exporte o caminho do vault antes de abrir o Claude Code (ex.: no `~/.zshrc`):
+Exporte as variáveis antes de abrir o Claude Code (ex.: no `~/.zshrc`):
 
 ```bash
 export OBSIDIAN_VAULT_PATH="$HOME/caminho/do/vault"
+export GITHUB_AUTH_TOKEN="ghp_..."   # escopos de leitura: repo, read:org
 ```
 
-Linear, GitHub e Google Drive **não** vêm no plugin: a skill usa os MCPs que você já tem
+Linear e Google Drive **não** vêm no plugin: a skill usa os MCPs que você já tem
 configurados no Claude Code (conectores do claude.ai ou `claude mcp add`). Se algum faltar,
 o setup avisa e pede a configuração; a fonte ausente fica de fora do documento. Para a
 trilha, dá para usar um export em Markdown/PDF dentro do vault no lugar do Drive.
+
+Se você já tem um MCP do GitHub configurado globalmente, remova a entrada duplicada
+do `.mcp.json`.
 
 ## Estrutura esperada do vault
 

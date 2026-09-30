@@ -8,9 +8,10 @@ Marketplace (`dalmow`) e plugin (`dalmow-skills`) de skills e comandos para o Cl
 - `.claude-plugin/plugin.json` — manifesto do plugin; **única** fonte da versão.
 - `commands/` — slash commands (`/dalmow-skills:<nome>`).
 - `skills/` — skills do plugin, cada uma com `SKILL.md` e `references/`.
-- `.mcp.json` — somente o MCP do vault do Obsidian (`OBSIDIAN_VAULT_PATH`). Linear, GitHub
-  e Drive usam os MCPs que o usuário já configurou no Claude Code; não adicione servidores
-  próprios para eles.
+- `.mcp.json` — MCP do vault do Obsidian (`OBSIDIAN_VAULT_PATH`) e MCP do GitHub (HTTP,
+  `https://api.githubcopilot.com/mcp/`, header `Authorization: Bearer ${GITHUB_AUTH_TOKEN}`).
+  Linear e Drive usam os MCPs que o usuário já configurou no Claude Code; não adicione
+  servidores próprios para eles.
 
 ## Versionamento (obrigatório)
 

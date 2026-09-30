@@ -13,10 +13,10 @@ O objetivo é produzir um brag document que o usuário leve para a avaliação d
 |---|---|---|
 | Obsidian (vault) | Contexto, impacto, feedbacks, estudos, trabalho invisível | MCP `obsidian-vault` do plugin (env `OBSIDIAN_VAULT_PATH`) |
 | Linear | Issues e projetos entregues | MCP do Linear já configurado no Claude Code |
-| GitHub | PRs abertos/mergeados e code reviews feitos | MCP do GitHub já configurado no Claude Code |
+| GitHub | PRs abertos/mergeados e code reviews feitos | MCP `github` do plugin (env `GITHUB_AUTH_TOKEN`) |
 | Google Drive | Trilha de carreira (expectativas por cargo) | MCP/conector do Google Drive já configurado no Claude Code |
 
-O plugin só traz o MCP do Obsidian. Linear, GitHub e Drive usam os servidores que o usuário já configurou no Claude Code (conectores do claude.ai ou `claude mcp add`, em qualquer escopo). Identifique-os pelas ferramentas disponíveis na sessão (nomes contendo `linear`, `github` ou `drive`/`google`), sem assumir um nome de servidor fixo.
+O plugin traz os MCPs do Obsidian e do GitHub. Linear e Drive usam os servidores que o usuário já configurou no Claude Code (conectores do claude.ai ou `claude mcp add`, em qualquer escopo). Identifique-os pelas ferramentas disponíveis na sessão (nomes contendo `linear` ou `drive`/`google`), sem assumir um nome de servidor fixo.
 
 Se alguma fonte não estiver disponível, avise o usuário qual está faltando, siga com as demais e deixe explícito no documento final que aquela fonte não foi consultada. Não bloqueie o trabalho por uma fonte ausente.
 
@@ -28,7 +28,8 @@ Esta fase é o setup do ciclo. Roda no início de todo brag document e também i
 
 Verifique uma fonte por vez e resolva antes de avançar:
 1. **Obsidian** — confirme que a env `OBSIDIAN_VAULT_PATH` está definida e aponta para um diretório existente, e que o MCP `obsidian-vault` responde. Se faltar, peça o caminho do vault e instrua a exportar a env no shell (ex.: `~/.zshrc`) e reabrir o Claude Code. Sem o vault não há onde ler nem salvar o perfil, então esta é a única fonte que bloqueia.
-2. **Linear**, **GitHub** e **Google Drive** — para cada um, procure ferramentas do MCP correspondente na sessão e faça uma chamada simples de leitura (ex.: usuário autenticado). Se não houver MCP, ou se ele falhar por autenticação/conexão, peça ao usuário para configurá-lo: conector no claude.ai (Settings → Connectors) ou `claude mcp add`, e autorização via `/mcp`. Não crie nem sugira configuração própria do plugin para essas fontes.
+2. **GitHub** — confirme que a env `GITHUB_AUTH_TOKEN` está definida e que o MCP `github` do plugin responde. Se faltar, peça o token (escopos de leitura: `repo`, `read:org`) e instrua a exportar a env no shell e reabrir o Claude Code.
+3. **Linear** e **Google Drive** — para cada um, procure ferramentas do MCP correspondente na sessão e faça uma chamada simples de leitura (ex.: usuário autenticado). Se não houver MCP, ou se ele falhar por autenticação/conexão, peça ao usuário para configurá-lo: conector no claude.ai (Settings → Connectors) ou `claude mcp add`, e autorização via `/mcp`. Não crie nem sugira configuração própria do plugin para essas fontes.
    - Para o Drive, se o usuário não quiser configurar um MCP, aceite a trilha exportada como Markdown/PDF dentro do vault e aponte `trilha_drive` para esse arquivo.
 
 Resuma em uma linha o que está disponível e o que ficou de fora.
