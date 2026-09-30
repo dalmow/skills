@@ -1,0 +1,9 @@
+{
+  "name": "dalmow-skills",
+  "version": "1.0.0",
+  "description": "Skills e comandos do Kelvi Dalmazo para Claude Code, instalável como plugin.",
+  "author": { "name": "Kelvi Dalmazo" },
+  "repository": "https://github.com/dalmow/skills",
+  "license": "MIT",
+  "keywords": ["brag-document", "autoavaliacao", "carreira", "skills"]
+}

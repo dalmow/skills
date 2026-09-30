@@ -1,7 +1,0 @@
-{
-  "name": "brag-document",
-  "version": "1.0.0",
-  "description": "Gera o brag document do ciclo semestral a partir de Linear, GitHub, Obsidian e da trilha de carreira no Google Drive.",
-  "author": { "name": "Seu Nome" },
-  "keywords": ["brag-document", "autoavaliacao", "carreira"]
-}

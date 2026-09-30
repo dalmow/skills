@@ -1,5 +1,5 @@
 ---
-description: Inicia o brag document do ciclo (ex.: /brag-document:brag 2026-2S)
+description: Inicia o brag document do ciclo (ex.: /dalmow-skills:brag 2026-2S)
 argument-hint: "[AAAA-XS]"
 ---
 

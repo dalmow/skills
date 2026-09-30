@@ -1,13 +1,20 @@
-# brag-document
+# dalmow/skills
 
-Plugin do Claude Code que gera o brag document do ciclo operacional semestral.
+Marketplace de plugins/skills do Kelvi Dalmazo para o Claude Code.
 
-## O que vem no plugin
+## Instalar
 
-- **Skill `avaliacao-ciclo`** — coleta, entrevista e geração do documento (ativa sozinha
-  quando você fala em brag document, autoavaliação, trilha de carreira etc.).
-- **`/brag-document:brag [AAAA-XS]`** — inicia o fluxo para um ciclo.
-- **`/brag-document:perfil [AAAA-XS]`** — mostra ou edita o perfil do ciclo
+```
+/plugin marketplace add dalmow/skills
+/plugin install dalmow-skills@dalmow
+```
+
+## O que vem no plugin `dalmow-skills`
+
+- **Skill `avaliacao-ciclo`** — coleta, entrevista e geração do brag document (ativa
+  sozinha quando você fala em brag document, autoavaliação, trilha de carreira etc.).
+- **`/dalmow-skills:brag [AAAA-XS]`** — inicia o fluxo para um ciclo.
+- **`/dalmow-skills:perfil [AAAA-XS]`** — mostra ou edita o perfil do ciclo
   (cargo, trilha, orgs do GitHub, datas).
 - **`.mcp.json`** — servidores MCP do vault do Obsidian, GitHub e Linear.
 
