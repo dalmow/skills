@@ -1,16 +1,11 @@
 {
   "mcpServers": {
-    "obsidian-vault": {
-      "command": "sh",
-      "args": [
-        "-c",
-        "if [ -z \"$OBSIDIAN_VAULT_PATH\" ] || [ ! -d \"$OBSIDIAN_VAULT_PATH\" ]; then echo \"obsidian-vault: OBSIDIAN_VAULT_PATH not set or not a directory ('$OBSIDIAN_VAULT_PATH')\" >&2; exit 1; fi; exec npx -y @modelcontextprotocol/server-filesystem \"$OBSIDIAN_VAULT_PATH\""
-      ]
-    },
     "github": {
       "type": "http",
       "url": "https://api.githubcopilot.com/mcp/",
-      "headers": { "Authorization": "Bearer ${GITHUB_AUTH_TOKEN}" }
+      "headers": {
+        "Authorization": "Bearer ${GITHUB_AUTH_TOKEN}"
+      }
     }
   }
 }

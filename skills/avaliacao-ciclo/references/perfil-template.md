@@ -1,4 +1,4 @@
-# Template do perfil (salvo em AAAA-XS/perfil.md)
+# Template do perfil (salvo em AAAA-XS/perfil.md, no vault = diretório atual)
 
 ```markdown
 ---
@@ -18,7 +18,7 @@ atualizado_em: 2026-09-30
 
 # Perfil do ciclo
 
-Arquivo mantido pela skill de brag document. Edite à vontade; a skill lê estes campos
+Arquivo mantido pela skill avaliacao-ciclo. Edite à vontade; a skill lê estes campos
 no início de cada execução e só pergunta o que estiver faltando.
 
 Sobre `github_orgs`: a busca no GitHub fica restrita às organizações listadas. PRs e

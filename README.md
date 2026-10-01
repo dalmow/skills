@@ -23,44 +23,55 @@ claude plugin update dalmow-skills@dalmow
 
 ## O que vem no plugin `dalmow-skills`
 
-- **Skill `avaliacao-ciclo`** — coleta, entrevista e geração do brag document (ativa
-  sozinha quando você fala em brag document, autoavaliação, trilha de carreira etc.).
-- **`/dalmow-skills:perfil [AAAA-XS]`** — setup do ciclo: verifica as fontes (Obsidian,
-  Linear, GitHub, Drive) e cria ou edita o perfil (cargo/nível, trilha, orgs, datas).
-- **`/dalmow-skills:brag [AAAA-XS]`** — gera o brag document. Começa pelo mesmo setup;
-  se o perfil do ciclo não existir, cria antes de coletar.
-- **`.mcp.json`** — servidores MCP do vault do Obsidian e do GitHub.
+Skill `avaliacao-ciclo`: braço direito durante o ciclo de avaliação. O **vault é a pasta
+onde você abre o Claude Code**; a skill cria `AAAA-XS/` nela.
+
+Durante o dia, fale naturalmente:
+
+- "salva esse feedback: ..." (texto ou imagem) → `Feedbacks/`
+- "anota esse ponto a melhorar: ..." → `Feedbacks/`
+- "anota esse impacto: ..." → `Negocio/`
+- "faz uma anotação: ..." → `Anotacoes/`
+
+Sob demanda, "gera um compilado" junta as notas ainda não compiladas em um brag parcial
+(`Brags/`) e marca cada nota com `compilado: true`. No fim do ciclo, "gera o brag final"
+consolida os parciais, Linear e GitHub quando agregam, e cruza tudo com a trilha de
+carreira do Drive e seu cargo atual.
+
+Comandos:
+
+- **`/dalmow-skills:perfil [AAAA-XS]`** — setup: fontes, cargo/nível, trilha, orgs, datas.
+- **`/dalmow-skills:brag-parcial [AAAA-XS]`** — compila os registros pendentes.
+- **`/dalmow-skills:brag-final [AAAA-XS]`** — gera o brag final do ciclo.
+- **`.mcp.json`** — MCP do GitHub.
 
 ## Pré-requisitos
 
-Exporte as variáveis antes de abrir o Claude Code (ex.: no `~/.zshrc`):
+Só o GitHub precisa de env (usado nas compilações):
 
 ```bash
-export OBSIDIAN_VAULT_PATH="$HOME/caminho/do/vault"
 export GITHUB_AUTH_TOKEN="ghp_..."   # escopos de leitura: repo, read:org
 ```
 
 No app desktop (aberto pelo Dock/Finder), as variáveis do `~/.zshrc` não chegam ao Claude
-Code: o vault fica vazio e o GitHub falha com `Authorization header is badly formatted`.
-Declare as duas no bloco `env` do `~/.claude/settings.json` ou abra o app pelo terminal
-(`open -a Claude`). Sem `OBSIDIAN_VAULT_PATH` válido, o MCP do vault falha de propósito
-em vez de ler outro diretório.
+Code e o GitHub falha com `Authorization header is badly formatted`. Declare a env no bloco
+`env` do `~/.claude/settings.json` ou abra o app pelo terminal (`open -a Claude`).
 
 Linear e Google Drive **não** vêm no plugin: a skill usa os MCPs que você já tem
-configurados no Claude Code (conectores do claude.ai ou `claude mcp add`). Se algum faltar,
-o setup avisa e pede a configuração; a fonte ausente fica de fora do documento. Para a
-trilha, dá para usar um export em Markdown/PDF dentro do vault no lugar do Drive.
+configurados no Claude Code (conectores do claude.ai ou `claude mcp add`). Fonte ausente
+fica de fora do documento. Para a trilha, dá para usar um export em Markdown/PDF dentro do
+vault no lugar do Drive.
 
 Se você já tem um MCP do GitHub configurado globalmente, remova a entrada duplicada
 do `.mcp.json`.
 
-## Estrutura esperada do vault
+## Estrutura do vault (criada na pasta atual)
 
 ```
 AAAA-XS/
 ├── perfil.md
-├── Feedbacks/
-├── Produto/
-├── Estudos/
-└── IA/
+├── Feedbacks/   (+ anexos/)
+├── Negocio/
+├── Anotacoes/
+└── Brags/
 ```

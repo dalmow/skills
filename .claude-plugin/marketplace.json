@@ -10,7 +10,7 @@
     {
       "name": "dalmow-skills",
       "source": "./",
-      "description": "Skills e comandos do Kelvi Dalmazo para Claude Code (brag document, autoavaliação de ciclo).",
+      "description": "Skills e comandos do Kelvi Dalmazo para Claude Code (registro diário e brag document do ciclo).",
       "category": "productivity",
       "keywords": ["brag-document", "autoavaliacao", "carreira"]
     }

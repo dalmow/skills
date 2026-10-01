@@ -1,34 +1,46 @@
 # Estrutura do vault
 
+O vault é o diretório onde o Claude Code está rodando. A skill cria (com confirmação) a pasta do ciclo nele:
+
 ```
-AAAA-XS/              ex.: 2026-2S (X = número do semestre)
-├── perfil.md         cargo, trilha, GitHub, datas (mantido pela skill)
-├── Feedbacks/        feedbacks recebidos (1:1, Slack, avaliação de pares, clientes internos)
-├── Produto/          entregas, contexto de negócio, decisões, métricas de impacto
-├── Estudos/          cursos, livros, artigos, certificações, experimentos técnicos
-└── IA/               uso de IA no trabalho: automações, ferramentas, prompts, ganhos medidos
+<diretório atual>/
+└── AAAA-XS/              ex.: 2026-2S (X = número do semestre)
+    ├── perfil.md         cargo, trilha, GitHub, datas
+    ├── Feedbacks/        feedbacks recebidos e pontos a melhorar
+    │   └── anexos/       imagens (prints, fotos) referenciadas pelas notas
+    ├── Negocio/          impactos de negócio, métricas, decisões, resultados
+    ├── Anotacoes/        anotações gerais (estudos, IA, mentoria, incidentes, contexto)
+    └── Brags/            brags parciais e o brag final
 ```
 
-## Como interpretar cada pasta
+## Notas raw
 
-**Feedbacks** — Fonte principal para pontos fortes e melhorias, porque traz a percepção de outras pessoas. Registre quem deu (ou o papel), quando e o contexto. Feedbacks críticos também contam: mostrar o que fez com eles é evidência de maturidade.
-
-**Produto** — Liga o trabalho técnico ao resultado. Procure o problema, a decisão tomada e o impacto (antes/depois). Cruze com Linear e GitHub pelo nome do projeto ou identificador de issue.
-
-**Estudos** — Evidência de desenvolvimento técnico. Tem mais peso quando o estudo virou aplicação prática (ex.: curso de observabilidade → dashboards criados em Produto).
-
-**IA** — Iniciativas com IA costumam mapear para critérios de inovação, produtividade ou influência técnica na trilha. Destaque o que foi adotado por outras pessoas ou gerou ganho mensurável.
-
-## Frontmatter opcional nas notas
-
-A skill funciona com notas livres, mas estes campos melhoram o cruzamento:
+Um arquivo por registro, nome `AAAA-MM-DD titulo-curto.md`. Frontmatter:
 
 ```yaml
 ---
-data: 2026-08-14
-linear: ENG-123
-pr: https://github.com/org/repo/pull/456
-impacto: "redução de 40% no tempo de fechamento mensal"
-trilha: [técnico, colaboração]
+tipo: feedback          # feedback | melhoria | negocio | anotacao
+data: 2026-10-01
+origem: "1:1 com a gestora"   # quem/onde, quando souber (feedback)
+sentimento: elogio      # só feedback/melhoria: elogio | critica | melhoria
+trilha: [colaboração]   # eixos da trilha, só se o usuário citar ou for óbvio
+linear: ENG-123         # opcional
+pr: https://github.com/org/repo/pull/456   # opcional
+impacto: "redução de 40% no fechamento mensal"   # opcional, só com dado do usuário
+compilado: false
 ---
 ```
+
+Depois de compilada em um parcial, a nota recebe (e só isso muda nela):
+
+```yaml
+compilado: true
+compilado_em: 2026-10-15
+brag: "Brag Parcial 2026-10-15"
+```
+
+## Brags
+
+- Parcial: `Brags/Brag Parcial AAAA-MM-DD.md`, frontmatter `tipo: brag-parcial`, `compilado: false`, `periodo_inicio`, `periodo_fim`.
+- Final: `Brags/Brag Final AAAA-XS.md`, frontmatter `tipo: brag-final`.
+- Quando um parcial é consumido pelo final, ele recebe `compilado: true`, `compilado_em` e `brag: "Brag Final AAAA-XS"`.
