@@ -1,6 +1,6 @@
 {
   "name": "dalmow-skills",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Skills e comandos do Kelvi Dalmazo para Claude Code, instalável como plugin.",
   "author": { "name": "Kelvi Dalmazo" },
   "repository": "https://github.com/dalmow/skills",
