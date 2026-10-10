@@ -22,7 +22,7 @@ Para **cada issue** solicitada pelo usuário:
 2. Crie uma **worktree separada** para a issue, a partir da branch principal atualizada, usando o nome de branch sugerido pelo Linear (ou `<ID-da-issue>-<slug-do-titulo>`).
 3. Dispare **um sub-agente de implementação por issue**, dentro dessa worktree, passando: ID da issue, conteúdo completo da issue, caminho da worktree e estas instruções (seção "Sub-agente de implementação").
 4. Issues diferentes podem rodar em paralelo, cada uma em sua worktree e seu sub-agente.
-5. Ao final, reporte ao usuário, por issue: link da PR, número de ciclos de revisão e eventuais pontos pendentes (só existem se o limite de 5 ciclos foi atingido).
+5. Ao final, reporte ao usuário, por issue: link da PR, número de ciclos de revisão e eventuais pontos **red** e **yellow** pendentes (só existem se o loop parou com esses pontos restantes).
 
 ## Sub-agente de implementação (um por issue)
 
@@ -43,27 +43,32 @@ Trabalhe **somente dentro da worktree da issue**.
 
 ### 3. Loop de correção
 
-Enquanto o relatório contiver **qualquer ponto** (**red**, **yellow** ou **green**):
+Um **ciclo** é uma rodada de correção seguida de nova revisão. A revisão inicial (seção 2) não conta como ciclo.
+
+Enquanto o relatório contiver **red** ou **yellow**, e o limite de ciclos não tiver sido atingido:
 
 1. **Não** mova a issue de volta para Em progresso. Ela **permanece em Em revisão** no Linear.
-2. Resolva **todos** os pontos do relatório, inclusive os green, sem pedir confirmação para aplicar as correções, usando novamente **`/mattpocock-skills:tdd`** (quando a correção envolver comportamento, escreva primeiro o teste que expõe o problema). Se houver dúvida sobre como implementar uma correção, pode questionar o usuário.
+2. Corrija **todos** os pontos **red** e **yellow**, que têm prioridade, sem pedir confirmação para aplicar as correções, usando novamente **`/mattpocock-skills:tdd`** (quando a correção envolver comportamento, escreva primeiro o teste que expõe o problema). Pontos **green** podem ser corrigidos junto, mas não justificam ciclo próprio. Se houver dúvida sobre como implementar uma correção, pode questionar o usuário.
 3. Rode testes, lint e typecheck. Tudo deve passar.
 4. Faça um **commit local** das correções (ex.: `fix(ABC-123): ajustes da revisão #N`).
 5. Dispare um **novo sub-agente de revisão** com `/mattpocock-skills:code-review` sobre o diff completo da branch.
 6. Repita.
 
-**Condição de saída:** o relatório de revisão volta **sem nenhum ponto** (red, yellow ou green). Nits, sugestões opcionais e preferências de estilo também são resolvidos; não são ignorados.
+**Condição de saída:** o relatório de revisão não contém mais **red** nem **yellow** (restam no máximo **green**). Green remanescentes não bloqueiam a PR; siga para a PR.
 
-**Limite de ciclos:** no máximo **5 ciclos** de correção. Se após o 5º ciclo ainda houver pontos, ou se o mesmo ponto reaparecer em 2 ciclos seguidos sem progresso, pare o loop, siga para a PR e liste os pontos pendentes (com a cor de cada um) na descrição da PR. Em caso de impasse sobre a implementação, pode questionar o usuário.
+**Limite de ciclos:**
+- No máximo **3 ciclos**. Se, após o 3º ciclo, ainda restarem **red** ou **yellow**, o loop expande para no máximo **5 ciclos no total**. Nunca passe de 5 ciclos.
+- Pare antes do limite se o mesmo ponto **red** ou **yellow** reaparecer em 2 ciclos seguidos sem progresso.
+- Ao parar com **red** ou **yellow** remanescentes (limite atingido ou sem progresso), siga para a PR e liste esses pontos, com a cor de cada um, na descrição da PR. Em caso de impasse sobre a implementação, pode questionar o usuário.
 
 ### 4. Pull Request
 
 1. Faça push da branch.
 2. Abra a PR **sem perguntar**, com:
    - Título: `[ID-da-issue] Título da issue`
-   - Descrição: resumo do que foi feito, link da issue no Linear, como testar, decisões técnicas tomadas, número de ciclos de revisão e pontos pendentes (se o limite de 5 ciclos foi atingido).
+   - Descrição: resumo do que foi feito, link da issue no Linear, como testar, decisões técnicas tomadas, número de ciclos de revisão e pontos **red** e **yellow** pendentes (se houver).
 3. **Não altere** o status da issue no Linear ao abrir a PR (ela continua em Em revisão).
-4. Retorne ao agente principal: link da PR, ciclos executados e pontos pendentes (se houver).
+4. Retorne ao agente principal: link da PR, ciclos executados e pontos **red** e **yellow** pendentes (se houver).
 
 ## Resumo das transições no Linear
 
